@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/reactive-streams-1.0.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/reactive-streams-1.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/rxjava-2.2.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/rxjava-1.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

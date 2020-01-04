@@ -1,19 +1,23 @@
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
+import rx.Observable;
+import rx.Observer;
 
 class Test1 {
-    static <T> void subscribe(T x) {
-        Disposable just = just(x).subscribe(x1 -> System.out.println("just: " + x1));
+    static <T> void subscribe(int x) {
+        just(x).subscribe(x1 -> System.out.println("just: " + x1));
 
-        Disposable never = never().subscribe(x2 -> System.out.println("never"));
+        never().subscribe(x2 -> System.out.println("never"));
 
-        Disposable never1 = Observable.never().subscribe(x3 -> System.out.println("never1"));
+        empty().subscribe(x3 -> {
+        }, e -> {
+        }, () -> System.out.println("empty"));
+
+        range(x, x).subscribe(x4 -> System.out.println("range: " + x4));
     }
 
     private static <T> Observable<T> just(T x) {
         return Observable.create(subscriber -> {
             subscriber.onNext(x);
-            subscriber.onComplete();
+            subscriber.onCompleted();
         });
     }
 
@@ -22,17 +26,17 @@ class Test1 {
         });
     }
 
-    private static <T> Observable<T> empty(T x) {
-        return Observable.create(subscriber -> {
-            subscriber.onNext(x);
-            subscriber.onComplete();
-        });
+    private static <T> Observable<T> empty() {
+        return Observable.create(Observer::onCompleted);
     }
 
-    private static <T> Observable<T> range(T x) {
+    private static <T> Observable<Integer> range(int from, int n) {
         return Observable.create(subscriber -> {
-            subscriber.onNext(x);
-            subscriber.onComplete();
+            for (int i = from; i < from + n; i++) {
+                subscriber.onNext(i);
+            }
+
+            subscriber.onCompleted();
         });
     }
 }
